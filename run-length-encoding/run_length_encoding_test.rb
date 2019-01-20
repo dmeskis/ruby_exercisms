@@ -4,42 +4,42 @@ require_relative 'run_length_encoding'
 # Common test data version: 1.1.0 1b7900e
 class RunLengthEncodingTest < Minitest::Test
   def test_encode_empty_string
-    # skip
+    skip
     input = ''
     output = ''
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
   def test_encode_single_characters_only_are_encoded_without_count
-    # skip
+    skip
     input = 'XYZ'
     output = 'XYZ'
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
   def test_encode_string_with_no_single_characters
-    # skip
+    skip
     input = 'AABBBCCCC'
     output = '2A3B4C'
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
   def test_encode_single_characters_mixed_with_repeated_characters
-    # skip
+    skip
     input = 'WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB'
     output = '12WB12W3B24WB'
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
   def test_encode_multiple_whitespace_mixed_in_string
-    # skip
+    skip
     input = '  hsqq qww  '
     output = '2 hs2q q2w2 '
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
   def test_encode_lowercase_characters
-    # skip
+    skip
     input = 'aabbbcccc'
     output = '2a3b4c'
     assert_equal output, RunLengthEncoding.encode(input)
@@ -67,7 +67,7 @@ class RunLengthEncodingTest < Minitest::Test
   end
 
   def test_decode_single_characters_with_repeated_characters
-    skip
+    # skip
     input = '12WB12W3B24WB'
     output = 'WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB'
     assert_equal output, RunLengthEncoding.decode(input)

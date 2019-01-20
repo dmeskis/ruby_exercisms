@@ -33,4 +33,22 @@ class RunLengthEncoding
     result
   end
 
+  def self.decode(input)
+    result = ''
+    first_idx = input.index /\D/
+    input.each_char.with_index do |char, i|
+      match = /\d/.match(char)
+      binding.pry
+      if match
+        char_to_be_decoded = input[i + 1]
+        new_string = char_to_be_decoded * match[0].to_i
+        result << new_string
+      else
+        result << char unless char == result[-1, 1]
+      end
+    end
+    result
+  end
+
+
 end
