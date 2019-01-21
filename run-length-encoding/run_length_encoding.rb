@@ -2,37 +2,11 @@ require 'pry'
 class RunLengthEncoding
 
   def self.encode(input)
-    input.scan(/((.)\2{1,})/).map(&:first)
-    binding.pry
-    result = ''
-    char_count = 0
-    prev_char = input[0]
-    input.each_char.with_index do |char, i|
-      if char == prev_char && i < input.length - 1
-        prev_char = char
-        char_count += 1
-      else
-        if i == input.length - 1
-          if char == prev_char
-            char_count += 1
-            result << "#{char_count}#{prev_char}"
-          elsif char_count > 1
-            result << "#{char_count}#{prev_char}#{char}"
-          else
-            result << "#{prev_char}#{char}"
-          end
-        elsif char_count > 1
-          result << "#{char_count}#{prev_char}"
-          char_count = 1
-          prev_char = char
-        else
-          result << prev_char
-          char_count = 1
-          prev_char = char
-        end
-      end
+    encoded = input.scan(/((.)\2{0,})/).each do |pair|
+      pair[0] = pair[0].length
+      if pair[0] == 1 then pair.shift end
     end
-    result
+    encoded.join
   end
 
   def self.decode(input)
