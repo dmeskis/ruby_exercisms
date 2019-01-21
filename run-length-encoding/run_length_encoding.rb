@@ -2,6 +2,8 @@ require 'pry'
 class RunLengthEncoding
 
   def self.encode(input)
+    input.scan(/((.)\2{1,})/).map(&:first)
+    binding.pry
     result = ''
     char_count = 0
     prev_char = input[0]
@@ -34,20 +36,13 @@ class RunLengthEncoding
   end
 
   def self.decode(input)
-    result = ''
-    first_idx = input.index /\D/
-    input.each_char.with_index do |char, i|
-      match = /\d/.match(char)
-      binding.pry
-      if match
-        char_to_be_decoded = input[i + 1]
-        new_string = char_to_be_decoded * match[0].to_i
-        result << new_string
-      else
-        result << char unless char == result[-1, 1]
-      end
+    pairs = (input).scan(/(\d*)(\D)/)
+    decoded = pairs.map do |pair|
+      times = pair[0].to_i
+      times = times > 1 ? times : 1
+      pair[1] * times
     end
-    result
+    decoded.join
   end
 
 
