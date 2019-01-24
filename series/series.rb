@@ -2,19 +2,14 @@ require 'pry'
 class Series
 
   def initialize(nums)
-    @nums = nums.each_char
+    @nums = nums.chars
   end
 
   def slices(length)
-    raise ArgumentError.new('IMPOSSIBLE!') unless @nums.size > length
-    arr = []
-    z = length - 1
-    @nums.each_with_index  do |e, i|
-      result = @nums[i..z].join
-      arr << result unless result.length < length
-      z += 1
-    end
-    arr
+    raise ArgumentError.new('IMPOSSIBLE!') unless @nums.length >= length
+    @nums.each_with_index.collect do |e, i|
+      @nums[i..i+length-1].join unless @nums[i..i+length].length < length
+    end.compact
   end
 
 end
