@@ -2,11 +2,11 @@ require 'pry'
 class Series
 
   def initialize(nums)
-    @nums = nums.split('')
+    @nums = nums.each_char
   end
 
   def slices(length)
-    if @nums.length < length then raise ArgumentError.new('IMPOSSIBLE!') end
+    raise ArgumentError.new('IMPOSSIBLE!') unless @nums.size > length
     arr = []
     z = length - 1
     @nums.each_with_index  do |e, i|
