@@ -8,15 +8,13 @@ class Phrase
   end
 
   def word_count
-    phrase_fix.split.each do |word|
-      counts[word] += 1
-    end
+    parsed.each { |word| counts[word] += 1 }
     counts
   end
 
 
-  def phrase_fix
-    phrase.gsub(/\W^\'/x, ' ').downcase
+  def parsed
+    phrase.scan(/\w+(?:'\w+)*/).map(&:downcase)
   end
 
 end
