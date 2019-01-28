@@ -1,20 +1,21 @@
 require 'pry'
 class Phrase
-  attr_reader :phrase, :counts
 
   def initialize(phrase)
-    @phrase = phrase
-    @counts = Hash.new(0)
+    @phrase = phrase.downcase
   end
 
   def word_count
-    parsed.each { |word| counts[word] += 1 }
-    counts
+    words.each_with_object(Hash.new(0)) { |word, hash| hash[word] += 1 }
   end
 
 
-  def parsed
-    phrase.scan(/\w+(?:'\w+)*/).map(&:downcase)
+  def words
+    phrase.scan(/\w+(?:'\w+)*/)
   end
+
+  private
+
+  attr_reader :phrase, :counts
 
 end
