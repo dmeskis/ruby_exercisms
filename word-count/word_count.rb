@@ -1,5 +1,7 @@
 require 'pry'
 class Phrase
+  # This regular expression separates all words from a string while ignoring punctuation outside of a word
+  WORD_PARSER = /\w+(?:'\w+)*/
 
   def initialize(phrase)
     @phrase = phrase.downcase
@@ -11,11 +13,11 @@ class Phrase
 
 
   def words
-    phrase.scan(/\w+(?:'\w+)*/)
+    phrase.scan(WORD_PARSER)
   end
 
   private
 
-  attr_reader :phrase, :counts
+  attr_reader :phrase
 
 end
