@@ -15,7 +15,6 @@ class Proverb
       @proverb << "For want of a #{word} the #{words[i+1]} was lost.\n" unless next_index > words.length - 1
     end
     @proverb << "And all for the want of a #{@final}."
-    @proverb
   end
 
   private
