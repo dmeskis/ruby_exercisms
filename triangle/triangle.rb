@@ -1,4 +1,3 @@
-require 'pry'
 class Triangle
   attr_reader :sides
 
@@ -18,16 +17,18 @@ class Triangle
     has_sides? && valid_triangle? && sides.uniq.length == 3
   end
 
+  private
+
+  def has_sides?
+    sides.any? { |i| i != 0 }
+  end
+
   def valid_triangle?
     sides[0] + sides[1] >= sides[2] && 
     sides[1] + sides[2] >= sides[0] && 
     sides[0] + sides[2] >= sides[1] ?
     true :
     false
-  end
-
-  def has_sides?
-    sides.any? { |i| i != 0 }
   end
 
 end
