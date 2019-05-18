@@ -20,11 +20,11 @@ class Scrabble
     score_regex.reduce(0) { |sum, (k, v)| sum + word.scan(v).count * k }
   end
 
-  private
-
   def self.score_regex
     {1 => ONE, 2 => TWO, 3 => THREE, 4 => FOUR, 5 => FIVE, 8 => EIGHT, 10 => TEN}
   end
+
+  private
 
   def clean_string(string)
     string.nil? ? '' : string.gsub(/[^0-9a-z ]/i, '')
