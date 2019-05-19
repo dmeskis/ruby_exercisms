@@ -7,9 +7,11 @@ class Scrabble
   FIVE = /(k)/i
   EIGHT = /(j|x)/i
   TEN = /(q|z)/i
+  SCORE_REGEX = {1 => ONE, 2 => TWO, 3 => THREE, 4 => FOUR, 5 => FIVE, 8 => EIGHT, 10 => TEN}
+  private_constant :ONE, :TWO, :THREE, :FOUR, :FIVE, :EIGHT, :TEN, :SCORE_REGEX
 
   def initialize(word)
-    @word = clean_string(word)
+    @word = word.to_s
   end
 
   def score
@@ -17,16 +19,6 @@ class Scrabble
   end
 
   def self.score(word)
-    score_regex.reduce(0) { |sum, (k, v)| sum + word.scan(v).count * k }
-  end
-
-  def self.score_regex
-    {1 => ONE, 2 => TWO, 3 => THREE, 4 => FOUR, 5 => FIVE, 8 => EIGHT, 10 => TEN}
-  end
-
-  private
-
-  def clean_string(string)
-    string.nil? ? '' : string.gsub(/[^0-9a-z ]/i, '')
+    SCORE_REGEX.reduce(0) { |sum, (score, regex)| sum + word.scan(regex).count * score }
   end
 end
